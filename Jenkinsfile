@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone the repository from GitHub
-                git 'https://github.com/Viswaraje/frontend-pipeline.git'
+                git branch: 'main', url: 'https://github.com/Viswaraje/frontend-pipeline.git'
             }
         }
 
