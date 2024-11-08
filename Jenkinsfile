@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Authenticate with DockerHub (add your Docker credentials to Jenkins)
-                    withDockerRegistry([credentialsId: 'dockerhub-viswaraje', url: 'https://index.docker.io/v1/']) {
+                    withDockerRegistry([credentialsId: 'docker-viswaraje', url: 'https://index.docker.io/v1/']) {
                         // Push the Docker image to DockerHub
                         bat 'docker push frontend-image'
                     }
