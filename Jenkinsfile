@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_IMAGE = 'frontend-image'
-    }
-
     stages {
         stage('Clone Repository') {
             steps {
@@ -17,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image using the multi-stage Dockerfile
-                    bat 'docker build -t %DOCKER_IMAGE% .'
+                    bat 'docker build -t frontend-image .'
                 }
             }
         }
@@ -28,7 +24,7 @@ pipeline {
                     // Authenticate with DockerHub (add your Docker credentials to Jenkins)
                     withDockerRegistry([credentialsId: 'dockerhub-viswaraje', url: 'https://index.docker.io/v1/']) {
                         // Push the Docker image to DockerHub
-                        bat 'docker push %DOCKER_IMAGE%'
+                        bat 'docker push frontend-image'
                     }
                 }
             }
@@ -38,7 +34,7 @@ pipeline {
             steps {
                 script {
                     // Run the Docker container and expose port 80
-                    bat 'docker run -d -p 80:80 %DOCKER_IMAGE%'
+                    bat 'docker run -d -p 80:80 frontend-image'
                 }
             }
         }
